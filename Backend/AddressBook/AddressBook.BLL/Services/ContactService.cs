@@ -59,6 +59,15 @@ namespace AddressBook.BLL.Services
                     "A contact with this email already exists."
                 );
 
+            var mobileExists = await ContactRepo.AnyAsync(
+                c => c.MobileNumber == dto.MobileNumber
+            );
+
+            if (mobileExists)
+                throw new BadRequestException(
+                    "A contact with this mobile number already exists."
+                );
+
             var contact = _mapper.Map<Contact>(dto);
 
             var photoName = await _fileService.Upload(
@@ -110,6 +119,15 @@ namespace AddressBook.BLL.Services
                     "A contact with this email already exists."
                 );
 
+            var mobileExists = await ContactRepo.AnyAsync(
+                c => c.MobileNumber == dto.MobileNumber
+                  && c.Id != id
+            );
+
+            if (mobileExists)
+                throw new BadRequestException(
+                    "A contact with this mobile number already exists."
+                );
             if (dto.Photo is not null)
             {
                 var oldPhoto = contact.Photo;

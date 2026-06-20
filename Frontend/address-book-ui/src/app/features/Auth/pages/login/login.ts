@@ -59,7 +59,6 @@ export class Login {
 
           const message = err?.error?.message ?? 'Something went wrong. Please try again.';
 
-          // Login failures are always email/password related — show under the password field
           if (message.toLowerCase().includes('email') || message.toLowerCase().includes('password')) {
             this.password.setErrors({ server: message });
             this.password.markAsTouched();

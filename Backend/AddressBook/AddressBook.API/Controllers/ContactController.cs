@@ -1,9 +1,11 @@
 ﻿using AddressBook.BLL.DTOs;
 using AddressBook.BLL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AddressBook.API.Controllers
 {
+    [Authorize]
     public class ContactController : BaseController
     {
         private readonly IContactService _contactService;
