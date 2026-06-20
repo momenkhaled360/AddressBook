@@ -1,4 +1,18 @@
-# Address Book
+## Note
+
+Sensitive information has been removed from the configuration files for security purposes.
+
+Before running the project, please configure:
+
+* `ConnectionStrings:DefaultConnection`
+* `JwtSettings:Secret`
+
+inside `appsettings.Development.json`.
+
+
+
+
+# Project Feature
 Address Book is a Full Stack application built using:
 
 ## Backend
