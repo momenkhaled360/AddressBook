@@ -1,0 +1,99 @@
+<div
+
+  class="mb-4 grid grid-cols-1 gap-3 rounded-2xl border border-gray-200 bg-gray-50 p-4 sm:grid-cols-2 lg:grid-cols-5">
+
+  <div class="lg:col-span-2">
+
+    <input
+
+      [formControl]="form.controls.keyword"
+
+      type="text"
+
+      placeholder="Search name, email, mobile..."
+
+      class="w-full rounded-xl border border-gray-300 px-4 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"/>
+
+  </div>
+
+  <div>
+
+    <select
+
+      [formControl]="form.controls.jobId"
+
+      class="w-full rounded-xl border border-gray-300 px-4 py-2 text-sm text-gray-700 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+
+      <option value="">
+
+        All jobs
+
+      </option>
+
+      @for (job of jobs(); track job.id) {
+
+      <option [value]="job.id">
+
+        {{ job.name }}
+
+      </option>
+
+      }
+
+    </select>
+
+  </div>
+
+  <div>
+
+    <input
+
+      [formControl]="form.controls.dateOfBirthFrom"
+
+      type="date"
+
+      class="w-full rounded-xl border border-gray-300 px-4 py-2 text-sm text-gray-700 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"/>
+
+  </div>
+
+  <div>
+
+    <input
+
+      [formControl]="form.controls.dateOfBirthTo"
+
+      type="date"
+
+      class="w-full rounded-xl border border-gray-300 px-4 py-2 text-sm text-gray-700 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"/>
+
+  </div>
+
+  <div class="flex gap-2 sm:col-span-2 lg:col-span-5 lg:justify-end">
+
+    <button
+
+      type="button"
+
+      (click)="apply()"
+
+      class="flex-1 rounded-xl bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700 sm:flex-none">
+
+      Search
+
+    </button>
+
+    <button
+
+      type="button"
+
+      (click)="clear()"
+
+      class="flex-1 rounded-xl border border-gray-300 px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-white sm:flex-none">
+
+      Clear
+
+    </button>
+
+  </div>
+
+</div>

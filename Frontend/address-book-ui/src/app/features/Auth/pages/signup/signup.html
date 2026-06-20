@@ -1,0 +1,104 @@
+<div class="flex min-h-screen items-center justify-center bg-gray-50 px-4">
+
+  <div class="w-full max-w-sm rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
+
+    <div class="mb-6 text-center">
+      <h1 class="text-2xl font-bold text-gray-900">Create account</h1>
+      <p class="mt-1 text-sm text-gray-500">Get started with Address Book</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4" novalidate>
+
+      <div>
+        <label class="mb-1 block text-sm font-medium text-gray-700">Full name</label>
+        <input
+          formControlName="fullName"
+          type="text"
+          placeholder="John Doe"
+          class="w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition focus:ring-2"
+          [class.border-gray-300]="!(fullName.invalid && fullName.touched)"
+          [class.focus:border-blue-500]="!(fullName.invalid && fullName.touched)"
+          [class.focus:ring-blue-100]="!(fullName.invalid && fullName.touched)"
+          [class.border-red-500]="fullName.invalid && fullName.touched"
+          [class.focus:ring-red-100]="fullName.invalid && fullName.touched"/>
+
+        @if (fullName.invalid && fullName.touched) {
+          <p class="mt-1 text-xs text-red-600">Full name is required</p>
+        }
+      </div>
+
+      <div>
+        <label class="mb-1 block text-sm font-medium text-gray-700">Email</label>
+        <input
+          formControlName="email"
+          type="email"
+          placeholder="you@example.com"
+          class="w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition focus:ring-2"
+          [class.border-gray-300]="!(email.invalid && email.touched)"
+          [class.focus:border-blue-500]="!(email.invalid && email.touched)"
+          [class.focus:ring-blue-100]="!(email.invalid && email.touched)"
+          [class.border-red-500]="email.invalid && email.touched"
+          [class.focus:ring-red-100]="email.invalid && email.touched"/>
+
+        @if (email.invalid && email.touched) {
+          <p class="mt-1 text-xs text-red-600">
+            @if (email.hasError('required')) {
+              Email is required
+            } @else if (email.hasError('email')) {
+              Please enter a valid email address
+            } @else if (email.hasError('server')) {
+              {{ email.getError('server') }}
+            }
+          </p>
+        }
+      </div>
+
+      <div>
+        <label class="mb-1 block text-sm font-medium text-gray-700">Password</label>
+        <input
+          formControlName="password"
+          type="password"
+          placeholder="At least 6 characters"
+          class="w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition focus:ring-2"
+          [class.border-gray-300]="!(password.invalid && password.touched)"
+          [class.focus:border-blue-500]="!(password.invalid && password.touched)"
+          [class.focus:ring-blue-100]="!(password.invalid && password.touched)"
+          [class.border-red-500]="password.invalid && password.touched"
+          [class.focus:ring-red-100]="password.invalid && password.touched"/>
+
+        @if (password.invalid && password.touched) {
+          <p class="mt-1 text-xs text-red-600">
+            @if (password.hasError('required')) {
+              Password is required
+            } @else if (password.hasError('minlength')) {
+              Password must be at least 6 characters
+            } @else if (password.hasError('server')) {
+              {{ password.getError('server') }}
+            }
+          </p>
+        }
+      </div>
+
+      @if (serverError) {
+        <p class="text-center text-sm text-red-600">
+          {{ serverError }}
+        </p>
+      }
+
+      <button
+        type="submit"
+        [disabled]="loading"
+        class="w-full rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700 disabled:opacity-50">
+        {{ loading ? 'Creating account...' : 'Create account' }}
+      </button>
+
+    </form>
+
+    <p class="mt-6 text-center text-sm text-gray-500">
+      Already have an account?
+      <a routerLink="/login" class="font-medium text-blue-600 hover:underline">Sign in</a>
+    </p>
+
+  </div>
+
+</div>

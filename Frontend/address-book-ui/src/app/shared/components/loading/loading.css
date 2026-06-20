@@ -1,0 +1,23 @@
+.loading-bar {
+
+  width: 30%;
+
+  animation: loading 1s linear infinite;
+
+}
+
+@keyframes loading {
+
+  from {
+
+    transform: translateX(-100%);
+
+  }
+
+  to {
+
+    transform: translateX(400%);
+
+  }
+
+}
