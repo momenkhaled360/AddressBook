@@ -15,6 +15,10 @@ import { JobService } from '../../../job/service/job-service';
 
 import { Job } from '../../../job/models/job';
 
+import { DepartmentService } from '../../../department/services/department-service';
+
+import { Department } from '../../../department/models/department';
+
 import { ContactSearch } from '../../models/contact-search';
 
 @Component({
@@ -39,15 +43,21 @@ export class ContactFilters implements OnInit {
 
   private jobService = inject(JobService);
 
+  private departmentService = inject(DepartmentService);
+
   filtersChanged = output<Partial<ContactSearch>>();
 
   jobs = signal<Job[]>([]);
+
+  departments = signal<Department[]>([]);
 
   form = this.fb.group({
 
     keyword: [''],
 
     jobId: [''],
+
+    departmentId: [''],
 
     dateOfBirthFrom: [''],
 
@@ -58,6 +68,8 @@ export class ContactFilters implements OnInit {
   ngOnInit(): void {
 
     this.loadJobs();
+
+    this.loadDepartments();
 
   }
 
@@ -83,6 +95,28 @@ export class ContactFilters implements OnInit {
 
   }
 
+  loadDepartments(): void {
+
+    this.departmentService
+      .getAll()
+      .subscribe({
+
+        next: (data) => {
+
+          this.departments.set(data);
+
+        },
+
+        error: (err) => {
+
+          console.log(err);
+
+        }
+
+      });
+
+  }
+
   apply(): void {
 
     const value = this.form.value;
@@ -92,6 +126,8 @@ export class ContactFilters implements OnInit {
       keyword: value.keyword || undefined,
 
       jobId: value.jobId ? Number(value.jobId) : null,
+
+      departmentId: value.departmentId ? Number(value.departmentId) : null,
 
       dateOfBirthFrom: value.dateOfBirthFrom || undefined,
 
@@ -108,6 +144,8 @@ export class ContactFilters implements OnInit {
       keyword: '',
 
       jobId: '',
+
+      departmentId: '',
 
       dateOfBirthFrom: '',
 

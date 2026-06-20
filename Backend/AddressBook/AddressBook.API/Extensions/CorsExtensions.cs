@@ -12,8 +12,8 @@
                 options.AddPolicy(AngularPolicy,
                     policy =>
                     {
-                        policy
-                        .WithOrigins("http://localhost:4200")
+                        //policy.WithOrigins("http://localhost:4200")
+                         policy.AllowAnyOrigin()
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                     });
