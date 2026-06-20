@@ -1,13 +1,8 @@
 ## Note
 
-Sensitive information has been removed from the configuration files for security purposes.
+appsettings.json contains placeholder values for security reasons.
 
-Before running the project, please configure:
-
-* `ConnectionStrings:DefaultConnection`
-* `JwtSettings:Secret`
-
-inside `appsettings.Development.json`.
+Local development settings are configured through appsettings.Development.json.
 
 
 
